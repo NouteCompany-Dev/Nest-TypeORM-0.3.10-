@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, JoinTable, ManyToMany, OneToMany, UpdateDateColumn } from 'typeorm';
 import { Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { AdministratorGroup } from './AdministratorGroup.entity';
 import { Department, MasterAuth } from './enum/enum';
 
 
@@ -44,14 +43,6 @@ export class Administrator {
 
     @UpdateDateColumn({ type: 'timestamp' })
     updatedAt: Date
-
-    @ManyToMany(() => AdministratorGroup, (group) => group.id)
-    @JoinTable({
-        name: 'Administrators-AdministratorGroups',
-        joinColumn: { name: 'adminId' },
-        inverseJoinColumn: { name: 'groupId' }
-    })
-    group: AdministratorGroup[]
 
     constructor(partial: Partial<Administrator>) {
         Object.assign(this, partial);

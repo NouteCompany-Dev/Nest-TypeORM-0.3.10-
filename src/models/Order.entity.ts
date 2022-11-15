@@ -4,6 +4,7 @@ import { OrderProduct } from "./OrderProduct.entity";
 import { Payment } from "./Payment.entity";
 import { generateRandomCode } from 'src/utils/date';
 import dayjs from 'dayjs';
+import { Point } from './Point.entity';
 
 
 @Entity({ name: 'Orders' })

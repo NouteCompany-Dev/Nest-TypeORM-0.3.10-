@@ -2,13 +2,12 @@ import { UserCart } from './UserCart.entity';
 import { ProductSupport } from './ProductSupport.entity';
 import { ProductReview } from './ProductReview.entity';
 import { Category } from './Category.entity';
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { ProductThumb } from './ProductThumb.entity';
 import { ProductImage } from './ProductImage.entity';
 import { ProductSale } from './ProductSale.entity';
 import { Seller } from './Seller.entity';
 import { HashTag } from './HashTag.entity';
-import { ProductGroup } from './ProductGroup.entity';
 import { TemplateColumn } from './TemplateColumn.entity';
 import { OrderProduct } from './OrderProduct.entity';
 import { ProductLiked } from './ProductLiked.entity';
@@ -20,6 +19,9 @@ import { ProductGroupProduct } from './ProductGroup-Product.entity';
 export class Product {
     @PrimaryColumn()
     id: number
+
+    @Column()
+    skuId: string
 
     @Column()
     productName: string
