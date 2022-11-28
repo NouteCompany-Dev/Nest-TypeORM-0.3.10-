@@ -14,6 +14,7 @@ import { AccessTokenGuard } from '../../lib/jwt/guards/accessToken.guard';
 import { RegistUserReqDto } from './dto/req/create.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileUpload } from 'src/interceptors/file-upload.interceptor';
+import { GetUser } from 'src/decorators/user.decorator';
 
 @Controller('user')
 export class UserController {
@@ -27,7 +28,7 @@ export class UserController {
 
     @UseGuards(AccessTokenGuard)
     @Get('info')
-    async getInfo(@Req() req: Request) {
-        return this.userService.getInfo(req.user['userId']);
+    async getInfo(@GetUser() userId: number, @Req() req: Request) {
+        return this.userService.getInfo(userId);
     }
 }

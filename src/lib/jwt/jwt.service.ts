@@ -11,8 +11,13 @@ export class JwtService {
 
     getToken(userId: number) {
         const randomString = generateRandomString();
-        const accessToken: string = jwt.sign({ userId: userId }, this.jwtSecret, { expiresIn: '1d' });
+        const accessToken: string = jwt.sign({ userId: userId }, this.jwtSecret, { expiresIn: '12h' });
         const refreshToken: string = jwt.sign({ randomString }, this.jwtSecret, { expiresIn: '7d' });
         return { accessToken, refreshToken };
     }
+
+    getRenewToken = (userId) => {
+        const accessToken = jwt.sign({ userId }, this.jwtSecret, { expiresIn: '12h' });
+        return { accessToken };
+    };
 }
