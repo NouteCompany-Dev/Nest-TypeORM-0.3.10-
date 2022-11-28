@@ -1,16 +1,18 @@
-import { Injectable } from "@nestjs/common";
-import jwt from 'jsonwebtoken'
+import { Injectable } from '@nestjs/common';
+import jwt from 'jsonwebtoken';
+import { generateRandomString } from 'src/utils/generateRandom';
 
 @Injectable()
 export class JwtService {
-    private readonly jwtSecret: string
+    private readonly jwtSecret: string;
     constructor() {
-        this.jwtSecret = process.env.JWT_SECERET
+        this.jwtSecret = process.env.JWT_SECERET;
     }
 
     getToken(userId: number) {
-        const accessToken: string = jwt.sign({ userId: userId }, this.jwtSecret, { expiresIn: '1d' })
-        const refreshToken: string = jwt.sign({ userId: userId }, this.jwtSecret, { expiresIn: '7d' })
-        return { accessToken, refreshToken }
+        const randomString = generateRandomString();
+        const accessToken: string = jwt.sign({ userId: userId }, this.jwtSecret, { expiresIn: '1d' });
+        const refreshToken: string = jwt.sign({ randomString }, this.jwtSecret, { expiresIn: '7d' });
+        return { accessToken, refreshToken };
     }
 }
